@@ -21,7 +21,8 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
-export const useDebounce = (value: any, delay?: number) => {
+// 后面用范型来规范类型
+export const useDebounce = (value: unknown, delay?: number): any => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
