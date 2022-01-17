@@ -1,12 +1,27 @@
 import React from "react";
 
-const List = ({ list, users }) => {
+import { User } from "./search-panel";
+
+interface Preject {
+  id: number;
+  personId: number;
+  name: string;
+  pin: boolean;
+  organization: string;
+}
+
+interface ListProps {
+  list: Preject[];
+  users: User[];
+}
+
+const List = ({ list, users }: ListProps) => {
   return (
     <table>
       <thead>
         <tr>
-          <th>名称:</th>
-          <th>负责人:</th>
+          <th>名称</th>
+          <th>负责人</th>
         </tr>
       </thead>
       <tbody>
