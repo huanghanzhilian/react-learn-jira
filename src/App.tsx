@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <ProjectListScreen />
+      <div>text</div>
     </div>
   );
 }
