@@ -21,6 +21,36 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
+export const useArray = <V>(value: V) => {
+  const [personValue, setPersonValue] = useState(value);
+  const results: {
+    value: V;
+    add: ({ name, age }: { name: string; age: number }) => void;
+    removeIndex: (index: number) => void;
+    clear: () => void;
+  } = {
+    value: personValue,
+    add: ({ name, age }) => {
+      // console.log({...{name, age}})
+      // @ts-ignore
+      setPersonValue([...personValue, { name, age }]);
+    },
+    removeIndex: (index) => {
+      // @ts-ignore
+      personValue.splice(index, 1);
+      // @ts-ignore
+      setPersonValue([...personValue]);
+    },
+    clear: () => {
+      // @ts-ignore
+      personValue.splice(0, personValue.length);
+      // @ts-ignore
+      setPersonValue([...personValue]);
+    },
+  };
+  return results;
+};
+
 // 后面用范型来规范类型
 export const useDebounce = <V>(value: V, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
