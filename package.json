@@ -49,10 +49,14 @@
     "@commitlint/config-conventional": "^16.0.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.4",
+    "jira-dev-tool": "^1.7.61",
     "lint-staged": "^12.1.7",
     "prettier": "2.5.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,less,md}": "prettier --write"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
