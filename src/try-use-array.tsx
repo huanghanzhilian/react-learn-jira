@@ -1,4 +1,3 @@
-import { clear } from "console";
 import React from "react";
 
 import { useMount, useArray } from "utils";
