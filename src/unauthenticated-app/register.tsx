@@ -4,8 +4,8 @@ import { useAuth } from "context/auth-context";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const LoginScreen = () => {
-  const { login, user } = useAuth();
+const RegisterScreen = () => {
+  const { register, user } = useAuth();
 
   console.log(user);
 
@@ -14,13 +14,11 @@ const LoginScreen = () => {
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
+    register({ username, password });
     event.preventDefault();
   };
   return (
     <form onSubmit={handleSubimit}>
-      {user ? <div>登陆成功，用户名：{user?.name}</div> : null}
-
       <div>
         <label htmlFor="usename">用户名</label>
         <input type="text" id="username" />
@@ -29,9 +27,9 @@ const LoginScreen = () => {
         <label htmlFor="password">密码</label>
         <input type="password" id="password" />
       </div>
-      <button type="submit">登陆</button>
+      <button type="submit">注册</button>
     </form>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
