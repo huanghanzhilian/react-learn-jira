@@ -29,11 +29,16 @@ const ProjectListScreen = () => {
   }, [debouncedParam]);
 
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+    fetch(`${apiUrl}/users`)
+      .then(async (response) => {
+        console.log(response);
+        if (response.ok) {
+          setUsers(await response.json());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   return (
