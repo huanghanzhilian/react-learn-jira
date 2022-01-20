@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import qs from "qs";
-
 import { useMount, useDebounce, cleanObject } from "../../utils";
 import { useHttp } from "utils/http";
 
 import { SearchPanel } from "./search-panel";
 import List from "./list";
 import styled from "@emotion/styled";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 const ProjectListScreen = () => {
   const [param, setParam] = useState({
@@ -26,6 +22,7 @@ const ProjectListScreen = () => {
     client("projects", {
       data: cleanObject(debouncedParam),
     }).then(setList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParam]);
 
   useMount(() => {
