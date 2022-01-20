@@ -64,6 +64,7 @@ const Header = styled.header`
 const ShadowCard = styled(Card)`
   width: 40rem;
   padding: 3.2rem 4rem;
+  margin-bottom: 15rem;
   border-radius: 0.3rem;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
