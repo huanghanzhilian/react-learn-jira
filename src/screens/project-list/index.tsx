@@ -7,6 +7,7 @@ import { useHttp } from "utils/http";
 
 import { SearchPanel } from "./search-panel";
 import List from "./list";
+import styled from "@emotion/styled";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -32,11 +33,16 @@ const ProjectListScreen = () => {
   });
 
   return (
-    <div className="test">
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
       <List users={users} list={list} />
-    </div>
+    </Container>
   );
 };
 
 export default ProjectListScreen;
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;

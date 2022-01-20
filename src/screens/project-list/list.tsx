@@ -1,4 +1,5 @@
 import { Table } from "antd";
+import dayjs from "dayjs";
 import React from "react";
 
 import { User } from "./search-panel";
@@ -9,6 +10,7 @@ interface Preject {
   name: string;
   pin: boolean;
   organization: string;
+  created: number;
 }
 
 interface ListProps {
@@ -27,6 +29,10 @@ const List = ({ list, users }: ListProps) => {
           sorter: (a, b) => a.name.localeCompare(b.name),
         },
         {
+          title: "部门",
+          dataIndex: "organization",
+        },
+        {
           title: "负责人",
           dataIndex: "personId",
           render: (value, project) => {
@@ -35,6 +41,15 @@ const List = ({ list, users }: ListProps) => {
                 {users.find((user) => user.id === project.personId)?.name ||
                   "未知"}
               </span>
+            );
+          },
+        },
+        {
+          title: "创建时间",
+          dataIndex: "created",
+          render: (value, project) => {
+            return (
+              <span>{value ? dayjs(value).format("YYYY-MM-DD") : "无"}</span>
             );
           },
         },
