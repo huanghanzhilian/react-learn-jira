@@ -4,16 +4,16 @@ import React from "react";
 
 import { User } from "./search-panel";
 
-interface Preject {
+export interface Project {
   id: number;
-  personId: number;
+  personId: number | string;
   name: string;
   pin: boolean;
   organization: string;
   created: number;
 }
 
-interface ListProps extends TableProps<Preject> {
+interface ListProps extends TableProps<Project> {
   users: User[];
 }
 
