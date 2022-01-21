@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import React from "react";
 
@@ -13,12 +13,11 @@ interface Preject {
   created: number;
 }
 
-interface ListProps {
-  list: Preject[];
+interface ListProps extends TableProps<Preject> {
   users: User[];
 }
 
-const List = ({ list, users }: ListProps) => {
+const List = ({ users, ...props }: ListProps) => {
   return (
     <Table
       pagination={false}
@@ -54,7 +53,7 @@ const List = ({ list, users }: ListProps) => {
           },
         },
       ]}
-      dataSource={list}
+      {...props}
     ></Table>
   );
 };
