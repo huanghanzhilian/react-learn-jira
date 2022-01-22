@@ -4,9 +4,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { DevTools, loadServer } from "jira-dev-tool";
 
-import { AppProviders } from "context/index";
-
+// 务必在jira-dev-tool后引入
 import "antd/dist/antd.less";
+import { AppProviders } from "context/index";
 
 loadServer(() => {
   ReactDOM.render(

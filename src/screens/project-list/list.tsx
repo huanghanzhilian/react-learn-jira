@@ -54,6 +54,7 @@ const List = ({ users, ...props }: ListProps) => {
         },
       ]}
       {...props}
+      rowKey={"id"}
     ></Table>
   );
 };
