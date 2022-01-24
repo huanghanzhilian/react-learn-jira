@@ -5,7 +5,7 @@ import { Select, Input, Form } from "antd";
 export interface User {
   id: number;
   name: string;
-  personId: number;
+  personId: number | string;
   organization: string;
   token: string;
 }

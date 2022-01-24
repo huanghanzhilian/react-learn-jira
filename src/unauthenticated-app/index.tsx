@@ -10,22 +10,16 @@ import right from "assets/right.svg";
 
 import RegisterScreen from "./register";
 import LoginScreen from "./login";
+import { useDocumentTitle } from "utils";
 
 const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-
+  useDocumentTitle("登陆或者注册", false);
   return (
     <Container>
       <Header />
       <Background />
-      <Button
-        onClick={() => {
-          throw new Error("点击抛出异常");
-        }}
-      >
-        抛出异常
-      </Button>
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
         {error ? (

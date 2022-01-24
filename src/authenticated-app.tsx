@@ -7,10 +7,8 @@ import ProjectListScreen from "screens/project-list";
 
 const AuthenticatedApp = () => {
   const { logout, user } = useAuth();
-  const value: any = undefined;
   return (
     <Container>
-      {value.notExist}
       <Header between={true}>
         <HeaderLeft gap={1}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />

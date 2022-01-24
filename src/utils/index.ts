@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const isFalsy = (value: any) => (value === 0 ? false : !value);
 
@@ -83,4 +83,25 @@ export const useDebounce = <V>(value: V, delay?: number) => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+export const useDocumentTitle = (
+  title: string,
+  keepOnUnmount: boolean = true
+) => {
+  // 页面加载时： oldTitle === 旧title 'React App'
+  const oldTitle = useRef(document.title).current;
+
+  // 加载后： oldTitl === 新title
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  // useEffect return 回调函数，会在卸载执行
+  useEffect(() => {
+    return () => {
+      // 如果不指定依赖，读到的就是旧title
+      document.title = oldTitle;
+    };
+  }, [keepOnUnmount, oldTitle]);
 };
