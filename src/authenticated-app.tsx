@@ -6,25 +6,28 @@ import { Dropdown, Menu, Button } from "antd";
 import ProjectListScreen from "screens/project-list";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import ProjectScreen from "screens/project";
+import React from "react";
+import { resetRoute } from "utils";
 
 const AuthenticatedApp = () => {
   return (
     <Container>
-      <PageHeader />
-      <Main>
-        <BrowserRouter>
+      <BrowserRouter>
+        <PageHeader />
+        <Main>
           <Routes>
             <Route path={"/projects"} element={<ProjectListScreen />} />
             <Route
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
             />
-            {/* <Navigate to={"/projects"} replace={true} /> */}
+            <Route
+              path="/"
+              element={<Navigate to={"/projects"} replace={true} />}
+            />
           </Routes>
-        </BrowserRouter>
-
-        {/* <ProjectListScreen /> */}
-      </Main>
+        </Main>
+      </BrowserRouter>
     </Container>
   );
 };
@@ -34,7 +37,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={1}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <Button type={"link"} onClick={resetRoute}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        </Button>
         <h3>项目</h3>
         <h3>组员</h3>
       </HeaderLeft>
