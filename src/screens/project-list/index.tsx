@@ -8,27 +8,14 @@ import { Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useUrlQueryParam } from "utils/url";
+import { useProjectsSearchParams } from "./util";
 
 const ProjectListScreen = () => {
-  const [params, setParams] = useState({
-    name: "",
-    personId: "",
-  });
-
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
-  console.log(param);
-  // setParam({
-  //   name: '223'
-  // })
-  // setParam({
-  //   ...param,
-  //   name: '122',
-  // })
-
-  const debouncedParam = useDebounce(param, 200);
-  const { isLoading, error, data: list } = useProjects(debouncedParam);
-  const { data: users } = useUsers();
   useDocumentTitle("项目列表", false);
+  const [param, setParam] = useProjectsSearchParams();
+  const { isLoading, error, data: list } = useDebounce(useProjects(param), 200);
+  const { data: users } = useUsers();
+
   return (
     <Container>
       <h1>项目列表</h1>
@@ -41,7 +28,7 @@ const ProjectListScreen = () => {
   );
 };
 
-ProjectListScreen.whyDidYouRender = true;
+ProjectListScreen.whyDidYouRender = false;
 
 export default ProjectListScreen;
 
