@@ -13,7 +13,12 @@ import { useProjectsSearchParams } from "./util";
 const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
   const [param, setParam] = useProjectsSearchParams();
-  const { isLoading, error, data: list } = useDebounce(useProjects(param), 200);
+  const {
+    isLoading,
+    error,
+    data: list,
+    retry,
+  } = useDebounce(useProjects(param), 200);
   const { data: users } = useUsers();
 
   return (
@@ -23,7 +28,12 @@ const ProjectListScreen = () => {
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
-      <List users={users || []} loading={isLoading} dataSource={list || []} />
+      <List
+        refresh={retry}
+        users={users || []}
+        loading={isLoading}
+        dataSource={list || []}
+      />
     </Container>
   );
 };
