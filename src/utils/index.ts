@@ -19,7 +19,6 @@ export const cleanObject = (object: { [key: string]: unknown }) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
@@ -36,36 +35,6 @@ export const useArray = <T>(initialValue: T[]) => {
     },
   };
 };
-
-// export const useArray = <V>(value: V) => {
-//   const [personValue, setPersonValue] = useState(value);
-//   const results: {
-//     value: V;
-//     add: ({ name, age }: { name: string; age: number }) => void;
-//     removeIndex: (index: number) => void;
-//     clear: () => void;
-//   } = {
-//     value: personValue,
-//     add: ({ name, age }) => {
-//       // console.log({...{name, age}})
-//       // @ts-ignore
-//       setPersonValue([...personValue, { name, age }]);
-//     },
-//     removeIndex: (index) => {
-//       // @ts-ignore
-//       personValue.splice(index, 1);
-//       // @ts-ignore
-//       setPersonValue([...personValue]);
-//     },
-//     clear: () => {
-//       // @ts-ignore
-//       personValue.splice(0, personValue.length);
-//       // @ts-ignore
-//       setPersonValue([...personValue]);
-//     },
-//   };
-//   return results;
-// };
 
 // 后面用范型来规范类型
 export const useDebounce = <V>(value: V, delay?: number) => {
@@ -108,4 +77,18 @@ export const useDocumentTitle = (
 
 export const resetRoute = () => {
   window.location.href = window.location.origin;
+};
+
+/**
+ * 返回组件的挂载状态，如果还没有挂载或者已经卸载，返回false;反之，返回true
+ */
+export const useMountedRef = () => {
+  const mountedRef = useRef(false);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+  return mountedRef;
 };
