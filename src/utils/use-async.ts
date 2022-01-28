@@ -55,7 +55,7 @@ export const useAsync = <D>(
           run(runConfig?.retry(), runConfig);
         }
       });
-      setState({ ...state, status: "loading" });
+      setState((prevState) => ({ ...prevState, status: "loading" }));
       return promise
         .then((data) => {
           if (mountedRef.current) {
@@ -72,7 +72,7 @@ export const useAsync = <D>(
           return error;
         });
     },
-    [config.throwOnError, setData, mountedRef, state]
+    [config.throwOnError, setData, setError, mountedRef]
   );
 
   return {
