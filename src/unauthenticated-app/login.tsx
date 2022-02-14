@@ -1,8 +1,6 @@
 import { Form, Input } from "antd";
 
 import { useAuth } from "context/auth-context";
-import { useDispatch } from "react-redux";
-import { loginThunk } from "store/auth.slice";
 import { useAsync } from "utils/use-async";
 
 import { LongButton } from "./";
@@ -11,13 +9,10 @@ const LoginScreen = ({ onError }: { onError: (error: Error) => void }) => {
   const { login } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
-  const dispatch = useDispatch();
-
   const handleSubimit = async (values: {
     username: string;
     password: string;
   }) => {
-    // dispatch(loginThunk(values))
     await run(login(values)).catch(onError);
   };
   return (

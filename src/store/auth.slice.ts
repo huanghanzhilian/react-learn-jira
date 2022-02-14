@@ -26,7 +26,7 @@ const { setUser } = authSlice.actions;
 
 export const selectUser = (state: RootState) => state.auth.user;
 
-export const loginThunk = (form: AuthForm) => (dispatch: AppDispatch) => {
+export const login = (form: AuthForm) => (dispatch: AppDispatch) => {
   auth.login(form).then((user) => dispatch(setUser(user)));
 };
 
