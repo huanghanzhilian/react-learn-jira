@@ -2,13 +2,11 @@ import { Dropdown, Menu, Table, TableProps } from "antd";
 import { ButtonNoPadding } from "components/lib";
 import { Pin } from "components/pin";
 import dayjs from "dayjs";
-import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEditProject } from "utils/project";
-import { projectListActions } from "./project-list.slice";
 
 import { User } from "./search-panel";
+import { useProjectModal } from "./util";
 
 export interface Project {
   id: number;
@@ -28,7 +26,7 @@ const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   const pinProject = (id: number) => (pin: boolean) =>
     mutate({ id, pin }).then(props.refresh);
-  const dispatch = useDispatch();
+  const { open } = useProjectModal();
   return (
     <Table
       pagination={false}
@@ -84,12 +82,7 @@ const List = ({ users, ...props }: ListProps) => {
                 overlay={
                   <Menu>
                     <Menu.Item key={"edit"}>
-                      <ButtonNoPadding
-                        type={"link"}
-                        onClick={() =>
-                          dispatch(projectListActions.openProjectModal())
-                        }
-                      >
+                      <ButtonNoPadding type={"link"} onClick={open}>
                         创建项目
                       </ButtonNoPadding>
                     </Menu.Item>

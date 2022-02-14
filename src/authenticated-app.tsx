@@ -4,7 +4,12 @@ import { useAuth } from "context/auth-context";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Dropdown, Menu, Button } from "antd";
 import ProjectListScreen from "screens/project-list";
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Routes,
+  Route,
+} from "react-router-dom";
 import ProjectScreen from "screens/project";
 import React, { useState } from "react";
 import { resetRoute } from "utils";
@@ -12,11 +17,9 @@ import ProjectModal from "screens/project-list/project-modal";
 import ProjectPopover from "components/project-popover";
 
 const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
-
   return (
     <Container>
-      <BrowserRouter>
+      <Router>
         <PageHeader />
         <Main>
           <Routes>
@@ -31,8 +34,9 @@ const AuthenticatedApp = () => {
             />
           </Routes>
         </Main>
-      </BrowserRouter>
-      <ProjectModal />
+
+        <ProjectModal />
+      </Router>
     </Container>
   );
 };
