@@ -53,6 +53,7 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
 
   return null;
 };
+
 export const ButtonNoPadding = styled(Button)`
   padding: 0;
 `;
