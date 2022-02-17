@@ -5,20 +5,9 @@ import { useHttp } from "./http";
 import { useAsync } from "./use-async";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useProjectsSearchParams } from "screens/project-list/util";
 
 export const useProjects = (param?: Partial<Project>) => {
-  // const client = useHttp();
-  // const { run, ...result } = useAsync<Project[]>();
-  // const fetchProjects = useCallback(
-  //   () => client("projects", { data: cleanObject(param || {}) }),
-  //   [param, client]
-  // );
-  // useEffect(() => {
-  //   run(fetchProjects(), { retry: fetchProjects });
-  // }, [param]);
-
-  // return result;
-
   const client = useHttp();
   return useQuery<Project[]>(["projects", param], () =>
     client("projects", { data: param })
@@ -26,23 +15,10 @@ export const useProjects = (param?: Partial<Project>) => {
 };
 
 export const useEditProject = () => {
-  // const { run, ...asyncResult } = useAsync();
-  // const client = useHttp();
-  // const mutate = (params: Partial<Project>) => {
-  //   return run(
-  //     client(`projects/${params.id}`, {
-  //       data: params,
-  //       method: "PATCH",
-  //     })
-  //   );
-  // };
-  // return {
-  //   mutate,
-  //   ...asyncResult,
-  // };
-
   const client = useHttp();
   const queryclient = useQueryClient();
+  const [searchParams] = useProjectsSearchParams();
+  const queryKey = ["projects", searchParams];
   return useMutation(
     (params: Partial<Project>) =>
       client(`projects/${params.id}`, {
@@ -50,27 +26,26 @@ export const useEditProject = () => {
         method: "PATCH",
       }),
     {
-      onSuccess: () => queryclient.invalidateQueries("projects"),
+      onSuccess: () => queryclient.invalidateQueries(queryKey),
+      async onMutate(target) {
+        const previousItems = queryclient.getQueryData(queryKey);
+        queryclient.setQueryData(queryKey, (old?: Project[]) => {
+          return (
+            old?.map((project) =>
+              project.id === target.id ? { ...project, ...target } : project
+            ) || []
+          );
+        });
+        return { previousItems };
+      },
+      onError(error: any, newItem: any, context: any) {
+        queryclient.setQueryData(queryKey, context.previousItems);
+      },
     }
   );
 };
 
 export const useAddProject = () => {
-  // const { run, ...asyncResult } = useAsync();
-  // const client = useHttp();
-  // const mutate = (params: Partial<Project>) => {
-  //   return run(
-  //     client(`projects/${params.id}`, {
-  //       data: params,
-  //       method: "POST",
-  //     })
-  //   );
-  // };
-  // return {
-  //   mutate,
-  //   ...asyncResult,
-  // };
-
   const client = useHttp();
   const queryclient = useQueryClient();
 
