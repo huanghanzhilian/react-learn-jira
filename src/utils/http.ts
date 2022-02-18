@@ -47,18 +47,8 @@ export const http = async (
   });
 };
 
-// interface Person {
-//   name: string;
-//   age: number;
-// }
-// type Sem1 = typeof http;
-// const sem: Person = { name: "semlinker", age: 30 };
-// type Sem = typeof sem; // type Sem = Person
-
 export const useHttp = () => {
   const { user } = useAuth();
-  // TODO 讲解 TS 操作符 Utility Tyoes
-  // return ([endpoint, config]: [string, Config]) => http(endpoint, {...config, token: user?.token})
   return useCallback(
     (...[endpoint, config]: Parameters<typeof http>) =>
       http(endpoint, { ...config, token: user?.token }),

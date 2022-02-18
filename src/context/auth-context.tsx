@@ -1,6 +1,6 @@
 import React, { useState, ReactNode } from "react";
 
-import { User } from "screens/project-list/search-panel";
+import { User } from "types/user";
 import * as auth from "auth-provider";
 import { http } from "utils/http";
 import { useMount } from "utils";
