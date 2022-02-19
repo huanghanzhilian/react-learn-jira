@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 import { User } from "types/user";
 import * as auth from "auth-provider";
@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     error,
     isLoading,
     isIdle,
-    isError,
     run,
     setData: setUser,
   } = useAsync<User | null>();

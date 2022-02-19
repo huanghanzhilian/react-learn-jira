@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Card, Button, Divider, Typography } from "antd";
+import { Card, Button, Divider } from "antd";
 
 import styled from "@emotion/styled";
 

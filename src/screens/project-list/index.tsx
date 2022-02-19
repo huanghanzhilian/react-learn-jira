@@ -1,17 +1,11 @@
-import { useState } from "react";
-
 import { useDebounce, useDocumentTitle } from "../../utils";
 import { SearchPanel } from "./search-panel";
 import List from "./list";
 import styled from "@emotion/styled";
-import { Button, Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
-import { useUrlQueryParam } from "utils/url";
 import { useProjectModal, useProjectsSearchParams } from "./util";
 import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
-import { useDispatch } from "react-redux";
-import { projectListActions } from "./project-list.slice";
 
 const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
@@ -40,5 +34,7 @@ ProjectListScreen.whyDidYouRender = false;
 export default ProjectListScreen;
 
 const Container = styled.div`
+  width: 100%;
   padding: 3.2rem;
+  overflow: hidden;
 `;

@@ -11,7 +11,6 @@ import {
   Route,
 } from "react-router-dom";
 import ProjectScreen from "screens/project";
-import React, { useState } from "react";
 import { resetRoute } from "utils";
 import ProjectModal from "screens/project-list/project-modal";
 import ProjectPopover from "components/project-popover";
